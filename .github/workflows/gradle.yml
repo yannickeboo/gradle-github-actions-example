@@ -40,7 +40,7 @@ jobs:
       - uses: gradle/gradle-build-action@v2
         with:
           arguments: build --scan
-      - run: mkdir artifacts && cp target/*.jar artifacts
+      - run: mkdir artifacts && cp --from=build /home/gradle/src/build/libs/*.jar artifacts
       - uses: actions/upload-artifact@v2
         with:
           name: yannick.jar
