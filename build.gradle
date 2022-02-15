@@ -6,8 +6,12 @@ repositories {
     mavenCentral()
 }
 jar {
-    archiveBaseName = 'gs-gradle'
-    archiveVersion =  '0.1.0'
+  manifest {
+    attributes(
+      'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+      'Main-Class': 'hello.HelloWorld'
+    )
+  }
 }
 
 apply plugin: 'java'
