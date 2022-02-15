@@ -1,6 +1,14 @@
-FROM openjdk:8
-ENV APP_HOME=/usr/app/
-WORKDIR $APP_HOME
-COPY ./build/libs/*.jar /maven/app.jar
-EXPOSE 8080
-CMD ["java","-jar","maven/app.jar"]
+# For Java 11, try this
+FROM adoptopenjdk/openjdk11:alpine-jre
+
+#
+ARG JAR_FILE=/build/libs/*.jar
+
+#
+WORKDIR /opt/app
+
+#
+COPY ${JAR_FILE} app.jar
+
+#
+ENTRYPOINT ["java","-jar","app.jar"]
